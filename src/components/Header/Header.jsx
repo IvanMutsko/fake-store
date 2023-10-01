@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { ROUTES } from "../../utils/routes";
+import { useGetProductsQuery } from "../../redux/api/apiSlice";
 
 const Header = () => {
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleSearch = ({ target: { value } }) => {
+    setSearchValue(value);
+  };
+
+  const { data, isLoading } = useGetProductsQuery({ title: searchValue });
+
   return (
     <>
       <p>Logo Header</p>
@@ -17,11 +26,35 @@ const Header = () => {
             name="search"
             placeholder="Search..."
             autoComplete="off"
-            onChange={() => {}}
-            value=""
+            onChange={handleSearch}
+            value={searchValue}
           />
         </div>
-        <div>Preview-box with search items</div>
+        {searchValue && (
+          <div>
+            Preview-box with search items
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : !data.length ? (
+              <p>No results</p>
+            ) : (
+              data.map(({ title, images, id }) => {
+                return (
+                  <Link
+                    to={`/products/${id}`}
+                    onClick={() => setSearchValue("")}
+                    key={id}
+                  >
+                    <div>
+                      <img src={images[0]} alt={title} width="20px" />
+                      <h3>{title}</h3>
+                    </div>
+                  </Link>
+                );
+              })
+            )}
+          </div>
+        )}
       </form>
 
       <Link to={ROUTES.HOME}>Link at home</Link>
