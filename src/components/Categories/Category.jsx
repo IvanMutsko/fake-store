@@ -67,6 +67,12 @@ const Category = () => {
     setParams({ ...defaultParams, ...values });
   };
 
+  const handleResetFilter = () => {
+    setEnd(false);
+    setValues(defaultValues);
+    setParams(defaultParams);
+  };
+
   return (
     <section>
       <h2>{category?.name}</h2>
@@ -97,6 +103,10 @@ const Category = () => {
           <button type="submit" hidden />
         </div>
       </form>
+
+      <button type="click" onClick={handleResetFilter}>
+        Reset filter
+      </button>
 
       {isLoading ? (
         <p>Loading...</p>

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { ROUTES } from "../../utils/routes";
 import { useGetProductsQuery } from "../../redux/api/apiSlice";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
+  const { cart } = useSelector(({ user }) => user);
 
   const handleSearch = ({ target: { value } }) => {
     setSearchValue(value);
@@ -59,7 +61,7 @@ const Header = () => {
 
       <Link to={ROUTES.HOME}>Link at home</Link>
       <Link to={ROUTES.CART}>
-        Link at cart <span>2</span>
+        Link at cart <span>{cart.length}</span>
       </Link>
     </>
   );
