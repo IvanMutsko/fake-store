@@ -7,7 +7,7 @@ import { useGetProductsQuery } from "../../redux/api/apiSlice";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
-  const { cart } = useSelector(({ user }) => user);
+  const { cart } = useSelector(({ cart }) => cart);
 
   const handleSearch = ({ target: { value } }) => {
     setSearchValue(value);

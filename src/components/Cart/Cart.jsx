@@ -2,12 +2,12 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { sumBy } from "../../utils/common";
-import { addItemToCart, removeItemToCart } from "../../redux/user/userSlice";
+import { addItemToCart, removeItemToCart } from "../../redux/cart/cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
 
-  const { cart } = useSelector(({ user }) => user);
+  const { cart } = useSelector(({ cart }) => cart);
 
   const changeQuantity = (item, quantity) => {
     dispatch(addItemToCart({ ...item, quantity }));

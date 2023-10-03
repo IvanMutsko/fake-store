@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { ROUTES } from "../../utils/routes";
-import { addItemToCart, addItemToFavorites } from "../../redux/user/userSlice";
+import { addItemToCart, addItemToFavorites } from "../../redux/cart/cartSlice";
 
 const Product = (item) => {
   const { title, images, price, description } = item;
@@ -20,6 +20,8 @@ const Product = (item) => {
 
   const addToCart = () => {
     dispatch(addItemToCart(item));
+
+
   };
 
   const addToFavorites = () => {
