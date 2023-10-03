@@ -1,8 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { sumBy } from "../../utils/common";
-import { addItemToCart, removeItemToCart } from "../../redux/cart/cartSlice";
+import { addItemToCart, removeItemAtCart } from "../../redux/cart/cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Cart = () => {
   };
 
   const removeItem = (item) => {
-    dispatch(removeItemToCart(item.id));
+    dispatch(removeItemAtCart(item.id));
   };
 
   return (
@@ -31,7 +32,10 @@ const Cart = () => {
             return (
               <div key={id}>
                 <div>
-                  <h3>{title}</h3>
+                  <Link to={`/products/${id}`}>
+                    <h3>{title}</h3>
+                  </Link>
+
                   <img src={images[0]} alt={title} width="30px" />
                 </div>
 

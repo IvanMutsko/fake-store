@@ -63,6 +63,7 @@ const Header = () => {
       <Link to={ROUTES.CART}>
         Link at cart <span>{cart.length}</span>
       </Link>
+      <Link to={ROUTES.FAVORITES}>Link at favorites</Link>
     </>
   );
 };

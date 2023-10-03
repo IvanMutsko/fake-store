@@ -39,7 +39,7 @@ const cartSlice = createSlice({
 
       localStorage.setItem("cartItems", JSON.stringify(newCart));
     },
-    removeItemToCart: (state, { payload }) => {
+    removeItemAtCart: (state, { payload }) => {
       const newCart = state.cart.filter(({ id }) => id !== payload);
 
       state.cart = newCart;
@@ -57,10 +57,21 @@ const cartSlice = createSlice({
 
       localStorage.setItem("favoriteItems", JSON.stringify(newFavorites));
     },
+    removeItemAtFavorites: (state, { payload }) => {
+      const newFavorites = state.favorites.filter(({ id }) => id !== payload);
+
+      state.favorites = newFavorites;
+
+      localStorage.setItem("favoriteItems", JSON.stringify(newFavorites));
+    },
   },
 });
 
-export const { addItemToCart, removeItemToCart, addItemToFavorites } =
-  cartSlice.actions;
+export const {
+  addItemToCart,
+  removeItemAtCart,
+  addItemToFavorites,
+  removeItemAtFavorites,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
