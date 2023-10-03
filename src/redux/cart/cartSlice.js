@@ -5,14 +5,8 @@ const cartItems =
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [];
 
-const favoriteItems =
-  localStorage.getItem("favoriteItems") !== null
-    ? JSON.parse(localStorage.getItem("favoriteItems"))
-    : [];
-
 const initialState = {
   cart: cartItems,
-  favorites: favoriteItems,
 };
 
 const cartSlice = createSlice({
@@ -46,32 +40,9 @@ const cartSlice = createSlice({
 
       localStorage.setItem("cartItems", JSON.stringify(newCart));
     },
-    addItemToFavorites: (state, { payload }) => {
-      let newFavorites = [...state.favorites];
-      const found = state.favorites.find(({ id }) => id === payload.id);
-
-      if (!found) {
-        newFavorites.push({ ...payload });
-      }
-      state.favorites = newFavorites;
-
-      localStorage.setItem("favoriteItems", JSON.stringify(newFavorites));
-    },
-    removeItemAtFavorites: (state, { payload }) => {
-      const newFavorites = state.favorites.filter(({ id }) => id !== payload);
-
-      state.favorites = newFavorites;
-
-      localStorage.setItem("favoriteItems", JSON.stringify(newFavorites));
-    },
   },
 });
 
-export const {
-  addItemToCart,
-  removeItemAtCart,
-  addItemToFavorites,
-  removeItemAtFavorites,
-} = cartSlice.actions;
+export const { addItemToCart, removeItemAtCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
