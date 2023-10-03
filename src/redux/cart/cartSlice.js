@@ -1,8 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const cartItems =
+  localStorage.getItem("cartItems") !== null
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [];
+
+const favoriteItems =
+  localStorage.getItem("favoriteItems") !== null
+    ? JSON.parse(localStorage.getItem("favoriteItems"))
+    : [];
+
 const initialState = {
-  cart: [],
-  favorites: [],
+  cart: cartItems,
+  favorites: favoriteItems,
 };
 
 const cartSlice = createSlice({
@@ -26,9 +36,15 @@ const cartSlice = createSlice({
         newCart.push({ ...payload, quantity: 1 });
       }
       state.cart = newCart;
+
+      localStorage.setItem("cartItems", JSON.stringify(newCart));
     },
     removeItemToCart: (state, { payload }) => {
-      state.cart = state.cart.filter(({ id }) => id !== payload);
+      const newCart = state.cart.filter(({ id }) => id !== payload);
+
+      state.cart = newCart;
+
+      localStorage.setItem("cartItems", JSON.stringify(newCart));
     },
     addItemToFavorites: (state, { payload }) => {
       let newFavorites = [...state.favorites];
@@ -38,6 +54,8 @@ const cartSlice = createSlice({
         newFavorites.push({ ...payload });
       }
       state.favorites = newFavorites;
+
+      localStorage.setItem("favoriteItems", JSON.stringify(newFavorites));
     },
   },
 });
