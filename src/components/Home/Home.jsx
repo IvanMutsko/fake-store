@@ -22,7 +22,6 @@ const Home = () => {
 
   return (
     <>
-      Home
       <Poster />
       <Products products={list} amount={5} title={"Products title"} />
       <Categories categories={categories.list} title={"Categories title"} />

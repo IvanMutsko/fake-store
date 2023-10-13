@@ -20,9 +20,11 @@ function App() {
   return (
     <>
       <Header />
-      <div>
-        <Sidebar />
-        <AppRoutes />
+      <div className="bg-gray-800 text-gray-200 flex justify-center">
+        <div className="flex container w-7xl">
+          <Sidebar />
+          <AppRoutes />
+        </div>
       </div>
       <Footer />
     </>
