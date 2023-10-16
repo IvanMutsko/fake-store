@@ -21,17 +21,17 @@ const Home = () => {
   }, [dispatch, list.length]);
 
   return (
-    <>
+    <div className="container w-full">
       <Poster />
-      <Products products={list} amount={5} title={"Products title"} />
-      <Categories categories={categories.list} title={"Categories title"} />
+      <Products products={list} amount={5} title={"Top products"} />
+      <Categories categories={categories.list} title={"Goods by categories"} />
       <Banner />
       <Products
         products={filtered}
         amount={5}
-        title={"Products less than 100$ title"}
+        title={"Products less than 100$"}
       />
-    </>
+    </div>
   );
 };
 

@@ -8,9 +8,9 @@ const Sidebar = () => {
   const { list } = useSelector(({ categories }) => categories);
 
   return (
-    <section className="text-xl font-semibold text-orange-500 p-3 flex flex-col justify-between">
-      <h1>Categories</h1>
+    <section className="text-2xl font-semibold text-orange-500 p-5 flex flex-col justify-between w-1/5">
       <nav>
+        <h1 className="mb-6 text-3xl font-light">Categories:</h1>
         <ul className="flex flex-col gap-3">
           {list.map(({ id, name }) => (
             <li key={id}>
@@ -19,7 +19,7 @@ const Sidebar = () => {
                 className={({ isActive }) =>
                   `${
                     isActive ? "active" : ""
-                  } inline-block w-full cursor-pointer`
+                  } inline-block w-full cursor-pointer hover:text-gray-300`
                 }
               >
                 {name}
@@ -29,7 +29,10 @@ const Sidebar = () => {
         </ul>
       </nav>
       <div>
-        <Link to={ROUTES.HELP} className="inline-block w-full mt-auto">
+        <Link
+          to={ROUTES.HELP}
+          className="inline-block w-full mt-auto hover:text-gray-300"
+        >
           Help
         </Link>
       </div>

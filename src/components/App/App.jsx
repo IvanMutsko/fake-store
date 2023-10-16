@@ -20,12 +20,12 @@ function App() {
   return (
     <>
       <Header />
-      <div className="bg-gray-800 text-gray-200 flex justify-center">
-        <div className="flex container w-7xl">
+      <main className=" bg-gray-800 text-gray-200 ">
+        <div className="flex container max-w-7xl ml-auto mr-auto ">
           <Sidebar />
           <AppRoutes />
         </div>
-      </div>
+      </main>
       <Footer />
     </>
   );

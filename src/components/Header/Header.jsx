@@ -16,8 +16,8 @@ const Header = () => {
   const { data, isLoading } = useGetProductsQuery({ title: searchValue });
 
   return (
-    <header className="w-full py-5 flex justify-center border-b border-b-gray-500 border-solid bg-gray-900">
-      <div className="flex justify-between content-between container w-7xl ">
+    <header className="w-full py-5 px-10 flex justify-center border-b border-b-gray-500 border-solid bg-gray-900 ">
+      <div className="flex justify-between content-between container max-w-7xl ml-auto mr-auto">
         <Link
           to={ROUTES.HOME}
           className="text-4xl font-bold text-orange-500 p-3"
