@@ -5,10 +5,10 @@ import Category from "./Category";
 
 const SingleCategory = () => {
   return (
-    <>
+    <div className="flex flex-col">
       <Poster />
       <Category />
-    </>
+    </div>
   );
 };
 

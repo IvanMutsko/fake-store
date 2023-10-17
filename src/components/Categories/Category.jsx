@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { BallTriangle } from "react-loader-spinner";
 
 import { useGetProductsQuery } from "../../redux/api/apiSlice";
 
 import Products from "../Products/Products";
+
+import noResultsImg from "../../assets/images/no-results.png";
 
 const Category = () => {
   const { id } = useParams();
@@ -74,47 +77,70 @@ const Category = () => {
   };
 
   return (
-    <section>
-      <h2>{category?.name}</h2>
+    <section className="py-10 px-5">
+      <h2 className="text-5xl text-center text-orange-500 uppercase mb-10">
+        {category?.name}
+      </h2>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            name="title"
-            onChange={handleChange}
-            placeholder="Product name"
-          />
+      <div className="flex flex-col items-center gap-4">
+        <form onSubmit={handleSubmit}>
+          <div className="flex gap-4 justify-center">
+            <input
+              type="text"
+              name="title"
+              onChange={handleChange}
+              placeholder="Product name"
+              value={values.title}
+              className="w-1/3 text-gray-900 bg-slate-300 font-semibold px-4 py-2 text-xl border-none rounded-md hover:bg-slate-200"
+            />
 
-          <input
-            type="number"
-            name="price_min"
-            onChange={handleChange}
-            placeholder="Price min"
-          />
+            <input
+              type="number"
+              name="price_min"
+              onChange={handleChange}
+              placeholder="Price min"
+              value={values.price_min === 1 ? "" : values.price_min}
+              className="w-1/6 text-gray-900 bg-slate-300 font-semibold px-4 py-2 text-xl border-none rounded-md hover:bg-slate-200"
+            />
 
-          <input
-            type="number"
-            name="price_max"
-            onChange={handleChange}
-            placeholder="Price max"
-          />
+            <input
+              type="number"
+              name="price_max"
+              onChange={handleChange}
+              placeholder="Price max"
+              value={values.price_max === 99999 ? "" : values.price_max}
+              className="w-1/6 text-gray-900 bg-slate-300 font-semibold px-4 py-2 text-xl border-none rounded-md hover:bg-slate-200"
+            />
 
-          <button type="submit" hidden />
-        </div>
-      </form>
+            <button type="submit" hidden />
+          </div>
+        </form>
 
-      <button type="click" onClick={handleResetFilter}>
-        Reset filter
-      </button>
+        <button
+          type="click"
+          onClick={handleResetFilter}
+          className="px-6 py-2 bg-slate-500 text-xl font-semibold border-none rounded-lg hover:text-orange-500 hover:bg-slate-600"
+        >
+          Reset filter
+        </button>
+      </div>
 
       {isLoading ? (
-        <p>Loading...</p>
-      ) : !isSuccess || !items.length ? (
-        <div>
-          <p>No result</p>
-          <button type="click">Reset search</button>
+        <div className="flex justify-center items-center h-96">
+          <BallTriangle
+            height={100}
+            width={100}
+            radius={5}
+            color="rgb(249, 115, 22)"
+            ariaLabel="ball-triangle-loading"
+            visible={true}
+          />
         </div>
+      ) : !isSuccess || !items.length ? (
+        <div
+          className="container h-96 bg-contain bg-no-repeat bg-center flex items-center justify-center"
+          style={{ backgroundImage: `url(${noResultsImg})` }}
+        ></div>
       ) : (
         <Products title="" products={items} amount={items.length} />
       )}
@@ -125,6 +151,7 @@ const Category = () => {
           onClick={() =>
             setParams({ ...params, offset: params.offset + params.limit })
           }
+          className="block ml-auto mr-auto px-8 py-2 bg-slate-500 text-2xl font-semibold border-none rounded-lg hover:text-orange-500 hover:bg-slate-600"
         >
           Load more...
         </button>
