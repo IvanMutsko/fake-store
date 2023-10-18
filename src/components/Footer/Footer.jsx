@@ -10,7 +10,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col items-center w-full py-5 px-10  border-t border-t-gray-500 border-solid bg-gray-900 sticky bottom-0">
+    <footer className="flex flex-col items-center w-full py-5 px-10  border-t border-t-gray-500 border-solid bg-gray-900">
       <div className="mb-6 flex gap-8">
         <a
           href="#"

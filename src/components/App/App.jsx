@@ -18,16 +18,16 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main className=" bg-gray-800 text-gray-200 ">
-        <div className="flex container max-w-7xl ml-auto mr-auto ">
+      <main className="bg-gray-800 text-gray-200 grow">
+        <div className="flex container max-w-7xl mx-auto">
           <Sidebar />
           <AppRoutes />
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

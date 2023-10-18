@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import { BallTriangle } from "react-loader-spinner";
 
 import { useGetProductQuery } from "../../redux/api/apiSlice";
 import { getRelatedProducts } from "../../redux/products/productsSlice";
@@ -31,14 +32,23 @@ const SingleProduct = () => {
   }, [data, dispatch, list.length]);
 
   return (
-    <section>
+    <section className="py-10 px-5 w-full">
       {isSuccess ? (
         <>
           <Product {...data} />
           <Products products={related} amount={5} title="Related products" />
         </>
       ) : (
-        <p>Loading...</p>
+        <div className="flex justify-center items-center h-96">
+          <BallTriangle
+            height={100}
+            width={100}
+            radius={5}
+            color="rgb(249, 115, 22)"
+            ariaLabel="ball-triangle-loading"
+            visible={true}
+          />
+        </div>
       )}
     </section>
   );
