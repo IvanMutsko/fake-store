@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Categories = ({ title, categories = [] }) => {
   return (
-    <section className="mb-10">
+    <section className="mb-20">
       <h2 className="text-3xl text-center text-orange-500 uppercase mb-10">
         {title}
       </h2>

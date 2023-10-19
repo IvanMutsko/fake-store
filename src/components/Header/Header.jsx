@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { BsCart4 } from "react-icons/bs";
 
 import { ROUTES } from "../../utils/routes";
 import { useGetProductsQuery } from "../../redux/api/apiSlice";
@@ -79,9 +80,12 @@ const Header = () => {
             </Link>
             <Link
               to={ROUTES.CART}
-              className="inline-block py-1 border-b-4 border-transparent hover:text-gray-300 hover:border-gray-300"
+              className="inline-block py-1 border-b-4 border-transparent hover:text-gray-300 hover:border-gray-300 relative"
             >
-              Cart <span>{cart.length}</span>
+              Cart <BsCart4 className="inline" />{" "}
+              <span className="absolute -right-2 top-0 text-sm text-orange-500">
+                {cart.length}
+              </span>
             </Link>
           </div>
         </div>

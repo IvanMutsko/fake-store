@@ -8,7 +8,7 @@ const Sidebar = () => {
   const { list } = useSelector(({ categories }) => categories);
 
   return (
-    <section className="text-2xl font-semibold text-orange-500 p-5 flex flex-col justify-between w-1/5">
+    <section className="text-2xl font-semibold text-orange-500 p-5 flex flex-col justify-between w-1/5 ">
       <nav>
         <h1 className="mb-6 text-3xl font-light">Categories:</h1>
         <ul className="flex flex-col gap-3">

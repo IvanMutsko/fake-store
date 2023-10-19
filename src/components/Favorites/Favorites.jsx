@@ -1,8 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { MdDeleteForever } from "react-icons/md";
 
 import { removeItemAtFavorites } from "../../redux/favorites/favoritesSlice";
+
+import noResultsImg from "../../assets/images/no-results.png";
 
 const Favorites = () => {
   const dispatch = useDispatch();
@@ -14,37 +17,52 @@ const Favorites = () => {
   };
 
   return (
-    <section>
-      <h2>Your favorites</h2>
+    <section className="py-10 px-5 w-full">
+      <h2 className="text-5xl text-center text-orange-500 uppercase mb-10">
+        Your favorites
+      </h2>
 
       {!favorites.length ? (
-        <p>Favorites is empty...</p>
+        <div
+          className="container h-96 bg-contain bg-no-repeat bg-center flex items-center justify-center"
+          style={{ backgroundImage: `url(${noResultsImg})` }}
+        ></div>
       ) : (
-        <div>
+        <ul className="flex flex-col gap-4">
           {favorites.map((item) => {
             const { id, title, images, price } = item;
 
             return (
-              <div key={id}>
-                <div>
-                  <Link to={`/products/${id}`}>
-                    <h3>{title}</h3>
+              <li
+                key={id}
+                className="flex items-center w-full text-xl pb-4 border-b border-gray-500"
+              >
+                <div className="mr-auto">
+                  <Link
+                    to={`/products/${id}`}
+                    className="block text-2xl mb-4 hover:text-orange-500"
+                  >
+                    {title}
                   </Link>
 
-                  <img src={images[0]} alt={title} width="30px" />
+                  <img src={images[0]} alt={title} className="w-40" />
                 </div>
 
                 <div>
-                  <p>Price: {price}$</p>
+                  <p className="text-2xl text-center mr-6">Price: {price}$</p>
                 </div>
 
-                <button type="click" onClick={() => removeItem(item)}>
-                  Delete
+                <button
+                  type="click"
+                  onClick={() => removeItem(item)}
+                  className="hover:text-orange-500 text-3xl"
+                >
+                  <MdDeleteForever />
                 </button>
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       )}
     </section>
   );

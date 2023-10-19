@@ -4,10 +4,9 @@ import banner from "../../assets/images/banner.jpg";
 
 const Banner = () => {
   return (
-    <section
-      className="container h-96 bg-contain bg-no-repeat bg-center flex items-center justify-center"
-      style={{ backgroundImage: `url(${banner})` }}
-    ></section>
+    <section className="w-full shadow-3xl mb-20">
+      <img src={banner} alt="banner" className="h-full object-contain" />
+    </section>
   );
 };
 
