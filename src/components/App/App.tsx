@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { FC, useEffect } from "react";
 
 import AppRoutes from "../Routes/Routes";
 import Header from "../Header/Header";
@@ -8,9 +7,10 @@ import Sidebar from "../Sidebar/Sidebar";
 
 import { getCategories } from "../../redux/categories/categoriesSlice";
 import { getProducts } from "../../redux/products/productsSlice";
+import { useAppDispatch } from "../../hooks/hooks";
 
-function App() {
-  const dispatch = useDispatch();
+const App: FC = () => {
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getCategories());
@@ -29,6 +29,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;
