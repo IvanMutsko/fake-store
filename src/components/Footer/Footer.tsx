@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 
 import {
   BsTelegram,
@@ -8,7 +8,7 @@ import {
   BsTiktok,
 } from "react-icons/bs";
 
-const Footer = () => {
+const Footer: FC = () => {
   return (
     <footer className="flex flex-col items-center w-full py-5 px-10  border-t border-t-gray-500 border-solid bg-gray-900">
       <div className="mb-6 flex gap-8">

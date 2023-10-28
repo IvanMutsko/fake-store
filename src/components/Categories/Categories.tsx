@@ -1,7 +1,13 @@
-import React from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
+import Category from "../../models/Category";
 
-const Categories = ({ title, categories = [] }) => {
+interface CategoriesProps {
+  title: string;
+  categories: Category[];
+}
+
+const Categories: FC<CategoriesProps> = ({ title, categories = [] }) => {
   return (
     <section className="mb-20">
       <h2 className="text-3xl text-center text-orange-500 uppercase mb-10">

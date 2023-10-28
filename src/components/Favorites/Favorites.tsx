@@ -1,18 +1,19 @@
-import React from "react";
+import { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 
 import { removeItemAtFavorites } from "../../redux/favorites/favoritesSlice";
+import Product from "../../models/Product";
 
 import noResultsImg from "../../assets/images/no-results.png";
 
-const Favorites = () => {
+const Favorites: FC = () => {
   const dispatch = useDispatch();
 
   const { favorites } = useSelector(({ favorites }) => favorites);
 
-  const removeItem = (item) => {
+  const removeItem = (item: Product) => {
     dispatch(removeItemAtFavorites(item.id));
   };
 
@@ -29,7 +30,7 @@ const Favorites = () => {
         ></div>
       ) : (
         <ul className="flex flex-col gap-4">
-          {favorites.map((item) => {
+          {favorites.map((item: Product) => {
             const { id, title, images, price } = item;
 
             return (
@@ -53,7 +54,7 @@ const Favorites = () => {
                 </div>
 
                 <button
-                  type="click"
+                  type="button"
                   onClick={() => removeItem(item)}
                   className="hover:text-orange-500 text-3xl"
                 >

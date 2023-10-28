@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BallTriangle } from "react-loader-spinner";
@@ -8,8 +8,10 @@ import { useGetProductsQuery } from "../../redux/api/apiSlice";
 import Products from "../Products/Products";
 
 import noResultsImg from "../../assets/images/no-results.png";
+import Product from "../../models/Product";
+import CategoryModel from "../../models/Category";
 
-const Category = () => {
+const Category: FC = () => {
   const { id } = useParams();
   const { list } = useSelector(({ categories }) => categories);
 
@@ -27,8 +29,8 @@ const Category = () => {
   };
 
   const [isEnd, setEnd] = useState(false);
-  const [items, setItems] = useState([]);
-  const [category, setCategory] = useState(null);
+  const [items, setItems] = useState<Product[]>([]);
+  const [category, setCategory] = useState<CategoryModel | null>(null);
   const [values, setValues] = useState(defaultValues);
   const [params, setParams] = useState(defaultParams);
 
@@ -53,16 +55,17 @@ const Category = () => {
   useEffect(() => {
     if (!id || !list.length) return;
 
-    const category = list.find((item) => item.id === Number(id));
+    const category = list.find((item: CategoryModel) => item.id === Number(id));
 
     setCategory(category);
   }, [id, list]);
 
-  const handleChange = ({ target: { value, name } }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = event.target;
     setValues({ ...values, [name]: value });
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
 
     setItems([]);
@@ -117,7 +120,7 @@ const Category = () => {
         </form>
 
         <button
-          type="click"
+          type="button"
           onClick={handleResetFilter}
           className="px-6 py-2 bg-slate-500 text-xl font-semibold border-none rounded-lg hover:text-orange-500 hover:bg-slate-600"
         >
@@ -142,12 +145,12 @@ const Category = () => {
           style={{ backgroundImage: `url(${noResultsImg})` }}
         ></div>
       ) : (
-        <Products title="" products={items} amount={items.length} />
+        <Products title="" products={items} amount={items.length} grid={3} />
       )}
 
       {!isEnd && (
         <button
-          type="click"
+          type="button"
           onClick={() =>
             setParams({ ...params, offset: params.offset + params.limit })
           }

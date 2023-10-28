@@ -1,6 +1,6 @@
-import React from "react";
+import { FC } from "react";
 
-const Help = () => {
+const Help: FC = () => {
   return (
     <section className="py-10 px-5 w-full flex flex-col items-center">
       <h2 className="text-5xl text-center text-orange-500 uppercase mb-10">

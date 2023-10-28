@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BsCart4 } from "react-icons/bs";
 
 import { ROUTES } from "../../utils/routes";
 import { useGetProductsQuery } from "../../redux/api/apiSlice";
+import Product from "../../models/Product";
 
-const Header = () => {
-  const [searchValue, setSearchValue] = useState("");
+const Header: FC = () => {
+  const [searchValue, setSearchValue] = useState<string>("");
   const { cart } = useSelector(({ cart }) => cart);
 
-  const handleSearch = ({ target: { value } }) => {
+  const handleSearch = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(value);
   };
 
@@ -26,9 +29,9 @@ const Header = () => {
           Fake store
         </Link>
 
-        <div className="flex items-center gap-24">
+        <div className="flex items-center gap-24 ">
           <form>
-            <div>
+            <div className="relative  w-72">
               <input
                 type="search"
                 name="search"
@@ -36,29 +39,30 @@ const Header = () => {
                 autoComplete="off"
                 onChange={handleSearch}
                 value={searchValue}
-                className="text-gray-600 font-semibold px-4 py-1 text-xl border rounded-md"
+                className="text-gray-600 font-semibold px-4 py-1 text-xl border rounded-md w-full"
               />
             </div>
             {searchValue && (
-              <div>
-                Preview-box with search items
+              <div className="absolute w-72 bg-gray-400 border-b-0 rounded-b-lg  p-4 z-20 max-h-72 overflow-auto text-lg font-medium flex flex-col gap-2">
                 {isLoading ? (
                   <p>Loading...</p>
                 ) : !data.length ? (
                   <p>No results</p>
                 ) : (
-                  data.map(({ title, images, id }) => {
+                  data.map(({ title, images, id }: Product) => {
                     return (
-                      <Link
-                        to={`/products/${id}`}
-                        onClick={() => setSearchValue("")}
-                        key={id}
-                      >
-                        <div>
-                          <img src={images[0]} alt={title} width="20px" />
-                          <h3>{title}</h3>
-                        </div>
-                      </Link>
+                      <div className="w-full hover:scale-95 hover:bg-slate-500">
+                        <Link
+                          to={`/products/${id}`}
+                          onClick={() => setSearchValue("")}
+                          key={id}
+                        >
+                          <div className="flex items-center gap-2">
+                            <img src={images[0]} alt={title} className="w-20" />
+                            <h3>{title}</h3>
+                          </div>
+                        </Link>
+                      </div>
                     );
                   })
                 )}

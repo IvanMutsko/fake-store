@@ -1,24 +1,25 @@
-import React from "react";
+import { FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { HiOutlinePlusCircle, HiOutlineMinusCircle } from "react-icons/hi2";
-import {MdDeleteForever}from 'react-icons/md'
+import { MdDeleteForever } from "react-icons/md";
 
 import { sumBy } from "../../utils/common";
 import { addItemToCart, removeItemAtCart } from "../../redux/cart/cartSlice";
+import Product from "../../models/Product";
 
 import noResultsImg from "../../assets/images/no-results.png";
 
-const Cart = () => {
+const Cart: FC = () => {
   const dispatch = useDispatch();
 
   const { cart } = useSelector(({ cart }) => cart);
 
-  const changeQuantity = (item, quantity) => {
+  const changeQuantity = (item: Product, quantity: number) => {
     dispatch(addItemToCart({ ...item, quantity }));
   };
 
-  const removeItem = (item) => {
+  const removeItem = (item: Product) => {
     dispatch(removeItemAtCart(item.id));
   };
 
@@ -35,8 +36,9 @@ const Cart = () => {
         ></div>
       ) : (
         <ul className="flex flex-col gap-4">
-          {cart.map((item) => {
+          {cart.map((item: Product) => {
             const { id, title, images, price, quantity } = item;
+
 
             return (
               <li
@@ -56,7 +58,7 @@ const Cart = () => {
 
                 <div className="flex flex-col-reverse mr-6">
                   <button
-                    type="click"
+                    type="button"
                     onClick={() =>
                       changeQuantity(item, Math.max(1, quantity - 1))
                     }
@@ -68,7 +70,7 @@ const Cart = () => {
                     {quantity}
                   </p>
                   <button
-                    type="click"
+                    type="button"
                     onClick={() => changeQuantity(item, quantity + 1)}
                     className="hover:text-orange-500 text-4xl"
                   >
@@ -82,11 +84,11 @@ const Cart = () => {
                 </div>
 
                 <button
-                  type="click"
+                  type="button"
                   onClick={() => removeItem(item)}
                   className="hover:text-orange-500 text-3xl"
                 >
-                  <MdDeleteForever/>
+                  <MdDeleteForever />
                 </button>
               </li>
             );
@@ -95,7 +97,7 @@ const Cart = () => {
           <div>
             <p className="text-orange-500 text-3xl text-end">
               Total price:{" "}
-              {sumBy(cart.map(({ quantity, price }) => quantity * price))}$
+              {sumBy(cart.map((item: Product) => item.quantity * item.price))}$
             </p>
           </div>
         </ul>

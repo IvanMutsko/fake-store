@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { BallTriangle } from "react-loader-spinner";
@@ -11,7 +11,7 @@ import { ROUTES } from "../../utils/routes";
 import Product from "./Product";
 import Products from "./Products";
 
-const SingleProduct = () => {
+const SingleProduct: FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -36,7 +36,12 @@ const SingleProduct = () => {
       {isSuccess ? (
         <>
           <Product {...data} />
-          <Products products={related} amount={5} title="Related products" />
+          <Products
+            products={related}
+            amount={5}
+            title="Related products"
+            grid={5}
+          />
         </>
       ) : (
         <div className="flex justify-center items-center h-96">

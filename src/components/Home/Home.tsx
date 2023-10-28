@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Poster from "../Poster/Poster";
@@ -8,7 +8,7 @@ import Banner from "../Banner/Banner";
 
 import { filterByPrice } from "../../redux/products/productsSlice";
 
-const Home = () => {
+const Home: FC = () => {
   const dispatch = useDispatch();
 
   const { list, filtered } = useSelector(({ products }) => products);
@@ -30,6 +30,7 @@ const Home = () => {
         products={filtered}
         amount={5}
         title={"Products less than 100$"}
+        grid={5}
       />
     </div>
   );

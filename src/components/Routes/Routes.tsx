@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { ROUTES } from "../../utils/routes";
@@ -9,7 +10,7 @@ import Cart from "../Cart/Cart";
 import Favorites from "../Favorites/Favorites";
 import Help from "../Help/Help";
 
-const AppRoutes = () => {
+const AppRoutes: FC = () => {
   return (
     <Routes>
       <Route index element={<Home />} />

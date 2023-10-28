@@ -1,10 +1,10 @@
-import React from "react";
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 
 import { ROUTES } from "../../utils/routes";
 
-const Sidebar = () => {
+const Sidebar: FC = () => {
   const { list } = useSelector(({ categories }) => categories);
 
   return (
@@ -12,7 +12,7 @@ const Sidebar = () => {
       <nav>
         <h1 className="mb-6 text-3xl font-light">Categories:</h1>
         <ul className="flex flex-col gap-3">
-          {list.map(({ id, name }) => (
+          {list.map(({ id, name }: { id: number; name: string }) => (
             <li key={id}>
               <NavLink
                 to={`/categories/${id}`}

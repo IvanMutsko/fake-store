@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -6,12 +6,14 @@ import { ROUTES } from "../../utils/routes";
 import { addItemToCart } from "../../redux/cart/cartSlice";
 import { addItemToFavorites } from "../../redux/favorites/favoritesSlice";
 
-const Product = (item) => {
+import ProductModel from "../../models/Product";
+
+const Product: FC<ProductModel> = (item) => {
   const { title, images, price, description } = item;
 
   const dispatch = useDispatch();
 
-  const [currentImage, setCurrentImage] = useState();
+  const [currentImage, setCurrentImage] = useState<string | null>();
 
   useEffect(() => {
     if (!images.length) return;
@@ -30,12 +32,14 @@ const Product = (item) => {
   return (
     <section className="flex flex-col px-6">
       <div className="flex mb-4">
-        <img src={currentImage} alt="" className="w-1/2 mr-4" />
+        {currentImage && (
+          <img src={currentImage} alt={title} className="w-1/2 mr-4" />
+        )}
         <div className="flex flex-col justify-between">
           {images.map((image, idx) => (
             <img
               src={image}
-              alt=""
+              alt={title}
               key={idx}
               onClick={() => {
                 setCurrentImage(image);

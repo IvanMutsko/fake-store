@@ -1,7 +1,21 @@
-import React from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 
-const Products = ({ title, products = [], amount, grid }) => {
+import ProductModel from "../../models/Product";
+
+interface ProductsProps {
+  title: string;
+  products: ProductModel[];
+  amount: number;
+  grid: number;
+}
+
+const Products: FC<ProductsProps> = ({
+  title,
+  products = [],
+  amount,
+  grid,
+}) => {
   const list = products.filter((_, idx) => idx < amount);
 
   return (

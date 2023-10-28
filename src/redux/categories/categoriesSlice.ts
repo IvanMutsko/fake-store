@@ -2,8 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 import { BASE_URL } from "../../utils/constants";
+import Category from "../../models/Category";
 
-const initialState = {
+interface CategoriesState {
+  list: Category[];
+  isLoading: boolean;
+}
+
+const initialState: CategoriesState = {
   list: [],
   isLoading: false,
 };
@@ -24,17 +30,19 @@ export const getCategories = createAsyncThunk(
 const categoriesSlice = createSlice({
   name: "categories",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getCategories.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(getCategories.fulfilled, (state, action) => {
-      state.list = action.payload;
-      state.isLoading = false;
-    });
-    builder.addCase(getCategories.rejected, (state) => {
-      state.isLoading = false;
-    });
+    builder
+      .addCase(getCategories.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getCategories.fulfilled, (state, action) => {
+        state.list = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(getCategories.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 
